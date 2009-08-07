@@ -1,0 +1,4 @@
+1.10	2009-08-06
+	Works in 3.8
+
+	Separate lists for priveleged and unpriveleged users.

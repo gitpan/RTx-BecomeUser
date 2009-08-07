@@ -1,6 +1,6 @@
 <%INIT>
    if ($session{'CurrentUser'}->HasRight( Right => 'SuperUser', Object => $RT::System )) {
-       $tabs->{B} = {
+       $tabs->{BU} = {
                         title => loc('Become User'),
                         path => 'Admin/Tools/BecomeUser.html',
                     };

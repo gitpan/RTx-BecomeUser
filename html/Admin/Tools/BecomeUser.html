@@ -52,7 +52,7 @@
        Abort(loc('This feature is only available to system administrators'));
    }
 
-   my $users;
+   my($Pusers, $Uusers);
    if ( defined($ARGS{'UserName'}) ) {
 
       if (defined %session) {
@@ -61,12 +61,14 @@
       $m->comp( '/Elements/SetupSessionCookie', %ARGS );
       $session{'CurrentUser'} = RT::CurrentUser->new();
       $session{'CurrentUser'}->Load($ARGS{'UserName'});
-      $m->redirect($RT::WebURL);
-      $m->abort();
    } else {
 
-      $users = RT::Users->new($RT::SystemUser);
-      $users->_DoSearch();
+      $Pusers = RT::Users->new($RT::SystemUser);
+      $Pusers->LimitToPrivileged();
+      $Pusers->_DoSearch();
+
+      $Uusers = RT::Users->new($RT::SystemUser);
+      $Uusers->_DoSearch();
    }
 </%init>
 
@@ -76,21 +78,33 @@
     current_subtab => 'Admin/Tools/BecomeUser.html', 
     Title => $title &>
 
-<h2><&|/l&>Select User</&></h2>
+%if ($session{'CurrentUser'}->HasRight( Object=> $RT::System, Right => 'SuperUser')) {
+
+<h2><&|/l&>Select Privileged User</&></h2>
 <form name=BecomeUser action=BecomeUser.html>
-<select name="UserName" single size=5>
-%while ( my $User = $users->Next )  {
-<option <% ($User->Id == $session{'CurrentUser'}->Id) ? "SELECTED" : ''%>
-%if ($ValueAttribute eq 'id') {
-    value="<%$User->id%>"
-%} elsif ($ValueAttribute eq 'Name') {
-    value="<%$User->Name%>"
-%} 
-><%$User->Name . " (" . $User->RealName . ")" %></option>
+<select name="UserName" size="5">
+%while ( my $User = $Pusers->Next )  {
+<option value="<% $ValueAttribute eq 'Name' ? User->Name : $User->id %>" <% ($User->Id == $session{'CurrentUser'}->Id) ? 'SELECTED="SELECTED"' : ''%>><%$User->Name . " (" . $User->RealName . ")" %></option>
 %}
 </select>
 <& /Elements/Submit, Label => loc("Become User")&>
 </form>
+
+
+<h2><&|/l&>Select Unprivileged User</&></h2>
+<form name=BecomeUser action=BecomeUser.html>
+<select name="UserName" size="5">
+%while ( my $User = $Uusers->Next )  {
+%next if $User->Privileged;
+<option value="<% $ValueAttribute eq 'Name' ? User->Name : $User->id %>"><%$User->Name . " (" . $User->RealName . ")" %></option>
+%}
+</select>
+<& /Elements/Submit, Label => loc("Become User")&>
+</form>
+
+%} else {
+Congratulations, you are now <% $session{'CurrentUser'}->Name %>.
+%}
 
 <%args>
    $ValueAttribute => 'id'

@@ -1,6 +1,6 @@
 use inc::Module::Install;
      
-RTx('BecomeUser');
+RTx('RTx-BecomeUser');
 author('Amit Poddar <amit_poddark@yahoo.com>');
 license('perl');
    

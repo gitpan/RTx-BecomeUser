@@ -1,7 +1,7 @@
 package RTx::BecomeUser;
-$RTx::BecomeUser::VERSION = "0.01";
+$RTx::BecomeUser::VERSION = "1.10_1";
 
-require 5.003;
+require v5.8.3; #Same as modern RTs
 
 1;
 
@@ -11,24 +11,24 @@ __END__
 
 RTx::BecomeUser - Become any user
 
-=head1 VERSION
+=head1 SYNOPSIS
 
-This document describes version 0.01 of RTx::BecomeUser, released
-February 22, 2008.
+This extension provides an RT equivalent of C<su>. It allows users with the
+SuperUser right to drop priveleges and become somebody else.
 
 =head1 DESCRIPTION
 
-This RT extension provides a web interface for becoming any user i.e simulating
-logging in as any other user other than yourself. This privilege is provided only
-to the users with SuperUser privilege. 
-
-After installation, log in as superuser, and click on Configuration->Tools->Become User,
-choose the user you want to become from the list and click submit. It will redirect you
-to the home page with logged on user as the user you selected.
+The tool is accessible from Configuration->Tools->Become User.
+Choose the user you want to become from the list and click submit.
+If everything goes according to plan, the name in the upper right corner
+of the page will change, and you'll see a message congratulating you on
+adopting a new persona.
 
 =head1 AUTHORS
 
-Amit Poddar<lt>amit_poddark@yahoo.com<gt>
+Amit Poddar E<lt>amit_poddark@yahoo.comE<gt>/E<lt>poddar007@gmail.comE<gt>
+
+Jerrad Pierce E<lt>jpierce@cpan.orgE<gt>
 
 =head1 COPYRIGHT
 
@@ -40,4 +40,3 @@ modify it under the same terms as Perl itself.
 See L<http://www.perl.com/perl/misc/Artistic.html>
 
 =cut
-
