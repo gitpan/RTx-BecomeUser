@@ -1,0 +1,13 @@
+<%init>
+if( defined($id) &&
+  $session{'CurrentUser'}->HasRight( Object=> $RT::System, Right => 'SuperUser') ){
+  $tabs->{this}->{subtabs}->{'X-BecomeUser'} = {
+						title => loc('BecomeUser'),
+						path => 'Admin/Tools/BecomeUser.html?User='.$id
+					       };
+}
+</%init>
+<%args>
+$tabs
+$id=>undef
+</%args>

@@ -5,6 +5,7 @@ META.yml
 README.txt
 html/Admin/Tools/BecomeUser.html
 html/Callbacks/BecomeUserCallbacks/Admin/Elements/ToolTabs/Default
+html/Callbacks/BecomeUserCallbacks/Admin/Elements/UserTabs/Default
 inc/Module/Install.pm
 inc/Module/Install/Base.pm
 inc/Module/Install/Can.pm

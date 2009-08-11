@@ -53,14 +53,14 @@
    }
 
    my($Pusers, $Uusers);
-   if ( defined($ARGS{'UserName'}) ) {
+   if ( defined($ARGS{'User'}) ) {
 
       if (defined %session) {
          tied(%session)->delete;
       }
       $m->comp( '/Elements/SetupSessionCookie', %ARGS );
       $session{'CurrentUser'} = RT::CurrentUser->new();
-      $session{'CurrentUser'}->Load($ARGS{'UserName'});
+      $session{'CurrentUser'}->Load($ARGS{'User'});
    } else {
 
       $Pusers = RT::Users->new($RT::SystemUser);
@@ -82,7 +82,7 @@
 
 <h2><&|/l&>Select Privileged User</&></h2>
 <form name=BecomeUser action=BecomeUser.html>
-<select name="UserName" size="5">
+<select name="User" size="5">
 %while ( my $User = $Pusers->Next )  {
 <option value="<% $ValueAttribute eq 'Name' ? User->Name : $User->id %>" <% ($User->Id == $session{'CurrentUser'}->Id) ? 'SELECTED="SELECTED"' : ''%>><%$User->Name . " (" . $User->RealName . ")" %></option>
 %}
@@ -93,7 +93,7 @@
 
 <h2><&|/l&>Select Unprivileged User</&></h2>
 <form name=BecomeUser action=BecomeUser.html>
-<select name="UserName" size="5">
+<select name="User" size="5">
 %while ( my $User = $Uusers->Next )  {
 %next if $User->Privileged;
 <option value="<% $ValueAttribute eq 'Name' ? User->Name : $User->id %>"><%$User->Name . " (" . $User->RealName . ")" %></option>
@@ -107,5 +107,5 @@ Congratulations, you are now <% $session{'CurrentUser'}->Name %>.
 %}
 
 <%args>
-   $ValueAttribute => 'id'
+$ValueAttribute => 'id'
 </%args>

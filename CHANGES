@@ -1,4 +1,10 @@
-1.10	2009-08-06
-	Works in 3.8
+1.10_2	
+	Add impersonation sub-tab to user page.
+
+	Changed BecomeUser argument from UserName to User since it accepts ids.
+
+1.10_1	2009-08-06
+	Should now work in 3.8, en lieu of redirecting to front page,
+	which seemed to cause 3.8 problems, BecomeUser displays a note.
 
 	Separate lists for priveleged and unpriveleged users.

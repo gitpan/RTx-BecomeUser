@@ -1,5 +1,5 @@
 package RTx::BecomeUser;
-$RTx::BecomeUser::VERSION = "1.10_1";
+$RTx::BecomeUser::VERSION = "1.10_2";
 
 require v5.8.3; #Same as modern RTs
 
@@ -23,6 +23,10 @@ Choose the user you want to become from the list and click submit.
 If everything goes according to plan, the name in the upper right corner
 of the page will change, and you'll see a message congratulating you on
 adopting a new persona.
+
+=head1 SEE ALSO
+
+L<RTx::From> - for a more efficienct means of locating users to become
 
 =head1 AUTHORS
 
