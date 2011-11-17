@@ -4,8 +4,7 @@ MANIFEST
 META.yml
 README.txt
 html/Admin/Tools/BecomeUser.html
-html/Callbacks/BecomeUserCallbacks/Admin/Elements/ToolTabs/Default
-html/Callbacks/BecomeUserCallbacks/Admin/Elements/UserTabs/Default
+html/Callbacks/BecomeUserCallbacks/Elements/Tabs/Privileged
 inc/Module/Install.pm
 inc/Module/Install/Base.pm
 inc/Module/Install/Can.pm

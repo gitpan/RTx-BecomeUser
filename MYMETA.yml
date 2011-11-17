@@ -1,0 +1,21 @@
+---
+abstract: 'Become any user'
+author:
+  - 'Amit Poddar <amit_poddark@yahoo.com>'
+build_requires:
+  ExtUtils::MakeMaker: 0
+dynamic_config: 0
+generated_by: 'Module::Install version 0.68, CPAN::Meta::Converter version 2.112150'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: RTx-BecomeUser
+no_index:
+  directory:
+    - html
+    - inc
+    - t
+requires:
+  ExtUtils::MakeMaker: 6.59
+version: 0.01

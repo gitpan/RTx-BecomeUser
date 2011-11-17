@@ -1,0 +1,37 @@
+{
+   "abstract" : "Become any user",
+   "author" : [
+      "Amit Poddar <amit_poddark@yahoo.com>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Module::Install version 0.68, CPAN::Meta::Converter version 2.112150",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "RTx-BecomeUser",
+   "no_index" : {
+      "directory" : [
+         "html",
+         "inc",
+         "t"
+      ]
+   },
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : 0
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "6.59"
+         }
+      }
+   },
+   "release_status" : "stable",
+   "version" : "0.01"
+}

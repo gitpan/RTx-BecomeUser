@@ -1,15 +1,15 @@
-This module provides a way for a super user to effectively logon as any RT
+This module provides a way for a super user to effectively logon as any RT4
 user without knowing their password. It provides an HTML form where a super
 user can select a user from the list of users he/she wants to become.
 
-This form is provided as a link under Configuration->Tools->Become User
+This form is provided as a link under Tools->Become User
 
 INSTALLING:
 
    1.  Unzip the downloaded file
-          tar xvfz RTx-BecomeUser-1.10.tar.gz
+          tar xvfz RTx-BecomeUser-1.2_1.tar.gz
    2.  Change to the unzipped directory
-          cd RTx-BecomeUser-1.10
+          cd RTx-BecomeUser-1.2_1
    3.  Install this module
           perl Makefile.PL
           make install

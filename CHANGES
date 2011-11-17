@@ -1,3 +1,7 @@
+1.2_1 2011-11-15
+    Changed to work with RT4. Navigation menu system is changed from 3.x and bugs fixed where
+    after changing top a user, any other action would leave you logged out at a login screen.
+    
 1.10_2	
 	Add impersonation sub-tab to user page.
 

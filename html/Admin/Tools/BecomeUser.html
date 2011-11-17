@@ -48,62 +48,81 @@
 
 <%init>
    my $title = loc('Become User');
+
+   my($Pusers, $Uusers);
+
    unless ($session{'CurrentUser'}->HasRight( Object=> $RT::System, Right => 'SuperUser')) {
        Abort(loc('This feature is only available to system administrators'));
    }
-
-   my($Pusers, $Uusers);
-   if ( defined($ARGS{'User'}) ) {
-
-      if (defined %session) {
-         tied(%session)->delete;
-      }
-      $m->comp( '/Elements/SetupSessionCookie', %ARGS );
-      $session{'CurrentUser'} = RT::CurrentUser->new();
-      $session{'CurrentUser'}->Load($ARGS{'User'});
-   } else {
+   else {
 
       $Pusers = RT::Users->new($RT::SystemUser);
       $Pusers->LimitToPrivileged();
+      $Pusers->LimitToEnabled();
       $Pusers->_DoSearch();
 
       $Uusers = RT::Users->new($RT::SystemUser);
+      $Uusers->LimitToUnprivileged();
+      $Uusers->LimitToEnabled();
       $Uusers->_DoSearch();
+   }
+
+
+   if ( defined($ARGS{'User'}) ) {
+      $m->comp( '/Elements/SetupSessionCookie', %ARGS );
+
+      if (%session) {
+          # tied(%session)->delete;
+          RT::Interface::Web::InstantiateNewSession();
+      }
+
+      $session{'CurrentUser'} = RT::CurrentUser->new();
+      $session{'CurrentUser'}->Load($ARGS{'User'});
+      RT::Interface::Web::SetNextPage();
    }
 </%init>
 
 <& /Admin/Elements/Header, Title => $title &>
-<& /Admin/Elements/ToolTabs,
-    current_tab => 'Admin/Tools/BecomeUser.html',
-    current_subtab => 'Admin/Tools/BecomeUser.html', 
-    Title => $title &>
+<& /Elements/Tabs &>
+
+%#<& /Admin/Elements/ToolTabs,
+%#    current_tab => 'Admin/Tools/BecomeUser.html',
+%#    current_subtab => 'Admin/Tools/BecomeUser.html', 
+%#    Title => $title &>
 
 %if ($session{'CurrentUser'}->HasRight( Object=> $RT::System, Right => 'SuperUser')) {
 
 <h2><&|/l&>Select Privileged User</&></h2>
 <form name=BecomeUser action=BecomeUser.html>
-<select name="User" size="5">
+<select name="User">
+% my $count = 0;
 %while ( my $User = $Pusers->Next )  {
-<option value="<% $ValueAttribute eq 'Name' ? User->Name : $User->id %>" <% ($User->Id == $session{'CurrentUser'}->Id) ? 'SELECTED="SELECTED"' : ''%>><%$User->Name . " (" . $User->RealName . ")" %></option>
+% $count++;
+<option value="<% $ValueAttribute eq 'Name' ? $User->Name : $User->id %>" <% ($User->Id == $session{'CurrentUser'}->Id) ? 'selected="selected"' : ''%>><%$User->Name . " (" . $User->RealName . ")" %></option>
 %}
 </select>
 <& /Elements/Submit, Label => loc("Become User")&>
 </form>
+<% $count %>  users
 
 
 <h2><&|/l&>Select Unprivileged User</&></h2>
 <form name=BecomeUser action=BecomeUser.html>
-<select name="User" size="5">
+<select name="User">
+% $count = 0;
 %while ( my $User = $Uusers->Next )  {
-%next if $User->Privileged;
-<option value="<% $ValueAttribute eq 'Name' ? User->Name : $User->id %>"><%$User->Name . " (" . $User->RealName . ")" %></option>
+%#     next if $User->Privileged;
+% $count++;
+<option value="<% $ValueAttribute eq 'Name' ? $User->Name : $User->id %>"><%$User->Name . ($User->RealName ? " (" . $User->RealName . ")" : "") %></option>
 %}
 </select>
 <& /Elements/Submit, Label => loc("Become User")&>
 </form>
+<% $count %>  users 
 
 %} else {
 Congratulations, you are now <% $session{'CurrentUser'}->Name %>.
+%# $RT::Logger->error("Congratulations: ". $session{'CurrentUser'}->EmailAddress);
 %}
 
 <%args>

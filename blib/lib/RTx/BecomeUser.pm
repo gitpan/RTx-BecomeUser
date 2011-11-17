@@ -1,5 +1,5 @@
 package RTx::BecomeUser;
-$RTx::BecomeUser::VERSION = "1.2_1";
+$RTx::BecomeUser::VERSION = "1.10_2";
 
 require v5.8.3; #Same as modern RTs
 
@@ -13,17 +13,16 @@ RTx::BecomeUser - Become any user
 
 =head1 SYNOPSIS
 
-This extension provides an RT4 equivalent of C<su>. It allows users with the
+This extension provides an RT equivalent of C<su>. It allows users with the
 SuperUser right to drop priveleges and become somebody else.
 
 =head1 DESCRIPTION
 
-Last modified 2011-11-15 and will only work in RT 4.x.
-
-The tool is accessible from Tools->Become User. Choose the user you want to 
-become from the list and click submit. If everything goes according to plan, 
-the name in the top navigation menu will change, and you'll see a message 
-congratulating you on adopting a new persona.
+The tool is accessible from Configuration->Tools->Become User.
+Choose the user you want to become from the list and click submit.
+If everything goes according to plan, the name in the upper right corner
+of the page will change, and you'll see a message congratulating you on
+adopting a new persona.
 
 =head1 SEE ALSO
 
